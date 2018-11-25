@@ -1,0 +1,9 @@
+- Undo-redo : Stocker dans une classe la position de sokoban et la position des cases
+- Pattern Etat pour gérer les différents états du jeu (choix niveau, jeu, fin)
+- Visualisation : VueIHMFX qui utilise CommandeTabInt
+- Code boutons à mettre dans ControleurIHMFX
+- Commencer par une app où Sokoban se déplace sur une grille en reprenant chameaux6.1
+- On prend chameaux 6.1, on supprime ModeleNbCoup, CommandeInt, VueNbCoupIHMFX, IHMTerminal
+- On garde le code du sujet-observateur
+- Le modèle consiste à garder les coordonnées de Sokoban et l’état de la grille
+- opengameart.org pour les ressources
