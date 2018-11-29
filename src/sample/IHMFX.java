@@ -4,7 +4,9 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 
 public class IHMFX extends Application implements Observateur {
     VueIHMFX vue;
@@ -34,12 +36,12 @@ public class IHMFX extends Application implements Observateur {
                 setCentre(vue.gridPane).
                 ajoutBas(controleurIHMFX.reset).
                 setLargeur(800).
-                setHauteur(200).
+                setHauteur(400).
                 retourneScene();
 
         primaryStage.setScene(scene);
 
-        primaryStage.setTitle("Chameaux");
+        primaryStage.setTitle("Sokoban");
         primaryStage.show();
     }
 

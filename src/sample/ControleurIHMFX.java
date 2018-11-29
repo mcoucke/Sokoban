@@ -13,9 +13,6 @@ public class ControleurIHMFX {
         this.controleur = controleur;
         this.vue = vue;
 
-        for (int i=0; i<vue.myButton.length;i++)
-            vue.myButton[i].setOnAction(new MyAction(i));
-
         reset = new Button("Reset");
         reset.setOnAction(new ActionReset());
     }
