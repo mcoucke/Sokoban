@@ -39,4 +39,15 @@ public class Controleur implements Sujet {
         notifie();
     }
 
+    public CommandeTabString commandeGetEtat() {
+        return new CommandeTabString() {
+            @Override
+            public ArrayList<String> exec() {
+                return facadeModele.getEtat();
+            }
+        };
+    }
+
+
+
 }

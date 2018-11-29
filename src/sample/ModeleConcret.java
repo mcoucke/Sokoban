@@ -1,12 +1,84 @@
 package sample;
 
+import java.util.ArrayList;
+
 public class ModeleConcret implements Modele {
 
     // FONCTIONS À IMPLÉMENTER
 
-    public int[] etat = {};
+    public ArrayList<String> etat = new ArrayList<String>();
 
-    public int[] getEtat() {
+    ModeleConcret(){
+        etat.add("#");
+        etat.add("#");
+        etat.add("#");
+        etat.add("#");
+        etat.add(" ");
+        etat.add("#");
+        etat.add("#");
+        etat.add("#");
+        etat.add("#");
+        etat.add(",");
+        etat.add("#");
+        etat.add(" ");
+        etat.add(" ");
+        etat.add("#");
+        etat.add("#");
+        etat.add("#");
+        etat.add(" ");
+        etat.add(" ");
+        etat.add("#");
+        etat.add(",");
+        etat.add("#");
+        etat.add(" ");
+        etat.add("$");
+        etat.add(" ");
+        etat.add("*");
+        etat.add(" ");
+        etat.add("$");
+        etat.add(" ");
+        etat.add("#");
+        etat.add(",");
+        etat.add("#");
+        etat.add(" ");
+        etat.add(" ");
+        etat.add(" ");
+        etat.add("+");
+        etat.add(" ");
+        etat.add(" ");
+        etat.add(" ");
+        etat.add("#");
+        etat.add(",");
+        etat.add("#");
+        etat.add("#");
+        etat.add("#");
+        etat.add(" ");
+        etat.add(".");
+        etat.add("$");
+        etat.add("#");
+        etat.add("#");
+        etat.add("#");
+        etat.add(",");
+        etat.add(" ");
+        etat.add(" ");
+        etat.add("#");
+        etat.add(" ");
+        etat.add(".");
+        etat.add(" ");
+        etat.add("#");
+        etat.add(",");
+        etat.add(" ");
+        etat.add(" ");
+        etat.add("#");
+        etat.add("#");
+        etat.add("#");
+        etat.add("#");
+        etat.add("#");
+        etat.add(",");
+    }
+
+
+    public ArrayList<String> getEtat() {
         return etat;
     }
 

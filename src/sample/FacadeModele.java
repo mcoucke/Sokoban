@@ -1,5 +1,7 @@
 package sample;
 
+import java.util.ArrayList;
+
 public class FacadeModele {
     ModeleConcret modele = new ModeleConcret();
 
@@ -9,6 +11,10 @@ public class FacadeModele {
 
     public void reset() {
         modele.reset();
+    }
+
+    public ArrayList<String> getEtat() {
+        return modele.getEtat();
     }
 
 }

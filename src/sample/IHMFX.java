@@ -35,8 +35,8 @@ public class IHMFX extends Application implements Observateur {
         Scene scene = monteurScene.
                 setCentre(vue.gridPane).
                 ajoutBas(controleurIHMFX.reset).
-                setLargeur(800).
-                setHauteur(400).
+                setLargeur(1200).
+                setHauteur(700).
                 retourneScene();
 
         primaryStage.setScene(scene);
