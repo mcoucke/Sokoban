@@ -39,6 +39,21 @@ public class Controleur implements Sujet {
         notifie();
     }
 
+    public void undo() {
+        facadeModele.undo();
+        notifie();
+    }
+
+    public void redo() {
+        facadeModele.redo();
+        notifie();
+    }
+
+    public void solve() {
+        facadeModele.solve();
+        notifie();
+    }
+
     public CommandeTabString commandeGetEtat() {
         return new CommandeTabString() {
             @Override

@@ -13,6 +13,12 @@ public class FacadeModele {
         modele.reset();
     }
 
+    public void undo() { modele.undo(); }
+
+    public void redo() { modele.redo(); }
+
+    public void solve() { modele.solve(); }
+
     public ArrayList<String> getEtat() {
         return modele.getEtat();
     }

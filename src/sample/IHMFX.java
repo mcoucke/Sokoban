@@ -39,6 +39,9 @@ public class IHMFX extends Application implements Observateur {
                 setHauteur(700).
                 retourneScene();
 
+        //Ajouter les 3 autres boutons à la vue
+
+
         primaryStage.setScene(scene);
 
         primaryStage.setTitle("Sokoban");
