@@ -27,22 +27,26 @@ public class ModeleConcret implements Modele {
         return etat;
     }
 
-    public void move(int x, int y) {
-        int pos = getPos();
-        if(x == 0 && y == 1){ // haut
-            etat.set(pos, " ");
-            //ajouter déplacement du perso
-        }
-        else if(x == 0 && y == -1){ // bas
+    public ArrayList<Tuple> getMurs() {
+        return pos_caisses;
+    }
 
-        }
-        else if(x == 1 && y == 0){ // droite
-            etat.set(pos, " ");
-            etat.set(pos+1, "@");
-        }
-        else if(x == -1 && y ==0){ // gauche
-            etat.set(pos, " ");
-            etat.set(pos-1, "@");
+    public Tuple getPosPerso() {
+        return pos_perso;
+    }
+
+    public void move(int x, int y) {
+        //Parcours des caisses
+        for(Tuple t : pos_caisses){
+            // Si une caisse est sur la nouvelle pos du perso
+            if(t.getX() == pos_perso.getX() + x && t.getY() == pos_perso.getY() + y){
+                //On regarde si on peut pousser la caisse
+                if(etat.get(size_grid*t.getX() + t.getY() + x + y).equals(" ") ||
+                etat.get(size_grid*t.getX() + t.getY() + x + y).equals(".")){
+                    pos_perso.setPos(pos_perso.getX()+x,pos_perso.getY()+y);
+                    t.setPos(t.getX()+x, t.getY()+y);
+                }
+            }
         }
     }
 

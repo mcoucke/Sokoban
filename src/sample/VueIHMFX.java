@@ -15,7 +15,10 @@ import java.io.FileNotFoundException;
 public class VueIHMFX {
 
     CommandeTabString commandeGetEtat;
+    CommandeTabTuple commandeGetMurs;
+    CommandePosPerso commandeGetPosPerso;
     GridPane gridPane = new GridPane();
+    GridPane gridPaneNiveaux = new GridPane();
     Image[] sokoban = new Image[]{ new Image(new FileInputStream(
             "Character.png"),80,80,false,false),
             new Image(new FileInputStream(
@@ -32,6 +35,8 @@ public class VueIHMFX {
 
     public VueIHMFX(Controleur controleur) throws FileNotFoundException {
         commandeGetEtat = controleur.commandeGetEtat();
+        commandeGetMurs = controleur.commandeGetMurs();
+        commandeGetPosPerso = controleur.commandeGetPosPerso();
         dessine();
     }
 
@@ -49,23 +54,36 @@ public class VueIHMFX {
                 img.setImage(sokoban[3]);
                 taille_l++;
             }
-            else if(commandeGetEtat.exec().get(i).equals("$") || commandeGetEtat.exec().get(i).equals("*")){
-                img.setImage(sokoban[1]);
-                taille_l++;
-            }
             else if(commandeGetEtat.exec().get(i).equals(".")){
                 img.setImage(sokoban[2]);
-                taille_l++;
-            }
-            else if(commandeGetEtat.exec().get(i).equals("@") || commandeGetEtat.exec().get(i).equals("+")){
-                img.setImage(sokoban[0]);
                 taille_l++;
             } else {
                 ligne++;
                 col += taille_l;
                 taille_l = 0;
             }
+            if(commandeGetPosPerso.exec().getX() == taille_l && commandeGetPosPerso.exec().getY() == ligne){
+                img.setImage(sokoban[0]);
+            }
+            for(Tuple t : commandeGetMurs.exec()){
+                if(t.getX() == taille_l && t.getY() == ligne){
+                    img.setImage(sokoban[4]);
+                }
+            }
             gridPane.add(img, taille_l, ligne);
         }
     }
+
+    /*
+    public void generateGrid() {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 10; j++) {
+                int number = 4 * i + j + 1;
+                Button button = new Button("Niveau " + number);
+                button.setMaxHeight(80);
+                button.setMaxWidth(200);
+                gridPaneNiveaux.add(button, j, i);
+            }
+        }
+    }*/
 }

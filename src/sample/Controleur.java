@@ -63,6 +63,24 @@ public class Controleur implements Sujet {
         };
     }
 
+    public CommandeTabTuple commandeGetMurs() {
+        return new CommandeTabTuple() {
+            @Override
+            public ArrayList<Tuple> exec() {
+                return facadeModele.getMurs();
+            }
+        };
+    }
+
+    public CommandePosPerso commandeGetPosPerso() {
+        return new CommandePosPerso() {
+            @Override
+            public Tuple exec() {
+                return facadeModele.getPosPerso();
+            }
+        };
+    }
+
 
 
 }
