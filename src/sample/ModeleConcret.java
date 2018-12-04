@@ -129,6 +129,7 @@ public class ModeleConcret implements Modele {
 
     public ArrayList<String> getGrille(int niveau){
         ArrayList<String> grille = null;
+        int size = getSizeOfGrid(niveau);
         try {
             File file_Micro = new File("res/MicroCosmos.txt");
             FileReader reader = new FileReader(file_Micro);
@@ -138,6 +139,15 @@ public class ModeleConcret implements Modele {
             String line = bufferedReader.readLine();
             if (niveau == 1){
                 while (line != null && !line.startsWith(";")){
+                    if(line.length() < size){
+                        while (line.length() < size){
+                            line += " ";
+                        }
+                    }
+                    line = line.replace("@", " ");
+                    line = line.replace("+", ".");
+                    line = line.replace("$", " ");
+                    line = line.replace("*", ".");
                     System.out.println(line);
                     grille.add(line);
                     line = String.valueOf(bufferedReader.readLine());
@@ -151,6 +161,11 @@ public class ModeleConcret implements Modele {
 
 
                 while (line != null){
+                    if(line.length() < size){
+                        while (line.length() < size){
+                            line += " ";
+                        }
+                    }
                     if(cpt_niveau == niveau && !line.startsWith(";")){
                         grille.add(line);
                     }else if(line.startsWith(";") && cpt_niveau == niveau){
@@ -167,10 +182,6 @@ public class ModeleConcret implements Modele {
 
                 System.out.println(grille);
             }
-
-
-
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
