@@ -3,20 +3,37 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.layout.FlowPane;
 
 public class ControleurIHMFX {
     Controleur controleur;
     VueIHMFX vue;
     Button reset, undo, redo, solve;
+    FlowPane buttonPane;
 
     ControleurIHMFX(Controleur controleur, VueIHMFX vue) {
         this.controleur = controleur;
         this.vue = vue;
 
+        buttonPane = new FlowPane();
+
         reset = new Button("Reset");
         undo = new Button("Undo");
         redo = new Button("Redo");
         solve = new Button("Solve");
+
+        reset.setPrefSize(100, 50);
+        undo.setPrefSize(100, 50);
+        redo.setPrefSize(100, 50);
+        solve.setPrefSize(100, 50);
+
+        buttonPane.getChildren().add(reset);
+        buttonPane.getChildren().add(undo);
+        buttonPane.getChildren().add(redo);
+        buttonPane.getChildren().add(solve);
+        buttonPane.setStyle("-fx-alignment: center;");
+        buttonPane.setHgap(10);
+
 
         reset.setOnAction(new ActionReset());
         undo.setOnAction(new ActionUndo());
@@ -42,16 +59,10 @@ public class ControleurIHMFX {
         public void handle(ActionEvent event) { controleur.solve();}
     }
 
-    class MyAction implements EventHandler<ActionEvent> {
-        int indice;
-
-        MyAction(int indice) {
-            this.indice = indice;
-        }
-
+    class MoveAction implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            controleur.move(indice);
+            controleur.move(1, 0);
         }
     }
 }

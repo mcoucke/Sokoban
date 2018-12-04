@@ -17,9 +17,9 @@ public class ModeleNbCoup implements Modele {
     public ArrayList<String> getEtat(){
         return modele.getEtat();
     }
-    public void move(int indice) {
+    public void move(int x, int y) {
         nbCoup++;
-        modele.move(indice);
+        modele.move(x,y);
     }
 
     public void undo(){}

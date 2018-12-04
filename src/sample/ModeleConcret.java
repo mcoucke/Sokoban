@@ -8,6 +8,7 @@ public class ModeleConcret implements Modele {
     // FONCTIONS À IMPLÉMENTER
 
     public ArrayList<String> etat = new ArrayList<String>();
+    public ArrayList<String> etat_base = new ArrayList<String>();
 
     ModeleConcret(){
         etat.add("#");
@@ -76,6 +77,7 @@ public class ModeleConcret implements Modele {
         etat.add("#");
         etat.add("#");
         etat.add(",");
+        etat_base = etat;
     }
 
 
@@ -83,8 +85,23 @@ public class ModeleConcret implements Modele {
         return etat;
     }
 
-    public void move(int indice) {
+    public void move(int x, int y) {
+        int pos = getPos();
+        if(x == 0 && y == 1){ // haut
+            etat.set(pos, " ");
+            //ajouter déplacement du perso
+        }
+        else if(x == 0 && y == -1){ // bas
 
+        }
+        else if(x == 1 && y == 0){ // droite
+            etat.set(pos, " ");
+            etat.set(pos+1, "@");
+        }
+        else if(x == -1 && y ==0){ // gauche
+            etat.set(pos, " ");
+            etat.set(pos-1, "@");
+        }
     }
 
     public void undo(){
@@ -97,6 +114,16 @@ public class ModeleConcret implements Modele {
 
     public void solve(){
 
+    }
+
+    public int getPos(){
+        int pos = 0;
+        for(int i=0; i < etat.size(); i++){
+            if(etat.get(i).equals("@") || etat.get(i).equals("+")){
+                pos = i;
+            }
+        }
+        return pos;
     }
 
     public ArrayList<String> getGrille(int niveau){

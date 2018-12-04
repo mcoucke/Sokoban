@@ -29,8 +29,8 @@ public class Controleur implements Sujet {
             observateur.actualise();
     }
 
-    public void move(int x) {
-        facadeModele.move(x);
+    public void move(int x, int y) {
+        facadeModele.move(x,y);
         notifie();
     }
 

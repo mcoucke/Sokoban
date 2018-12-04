@@ -32,13 +32,16 @@ public class VueIHMFX {
 
     public VueIHMFX(Controleur controleur) throws FileNotFoundException {
         commandeGetEtat = controleur.commandeGetEtat();
+        dessine();
+    }
+
+    public void dessine() {
         int ligne = 0;
         int col = 0;
         int taille_l = 0;
         for(int i=0; i < commandeGetEtat.exec().size(); i++){
-            System.out.println(commandeGetEtat.exec().get(i));
             ImageView img = new ImageView();
-            if(commandeGetEtat.exec().get(i).equals("#") || commandeGetEtat.exec().get(i).equals("*")){
+            if(commandeGetEtat.exec().get(i).equals("#")){
                 img.setImage(sokoban[4]);
                 taille_l++;
             }
@@ -46,7 +49,7 @@ public class VueIHMFX {
                 img.setImage(sokoban[3]);
                 taille_l++;
             }
-            else if(commandeGetEtat.exec().get(i).equals("$")){
+            else if(commandeGetEtat.exec().get(i).equals("$") || commandeGetEtat.exec().get(i).equals("*")){
                 img.setImage(sokoban[1]);
                 taille_l++;
             }
@@ -64,10 +67,5 @@ public class VueIHMFX {
             }
             gridPane.add(img, taille_l, ligne);
         }
-        dessine();
-    }
-
-    public void dessine() {
-
     }
 }

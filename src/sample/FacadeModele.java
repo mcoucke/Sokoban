@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class FacadeModele {
     ModeleConcret modele = new ModeleConcret();
 
-    public void move(int x) {
-        modele.move(x);
+    public void move(int x, int y) {
+        modele.move(x,y);
     }
 
     public void reset() {
