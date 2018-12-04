@@ -8,7 +8,9 @@ public class ModeleConcret implements Modele {
     // FONCTIONS À IMPLÉMENTER
 
     public ArrayList<String> etat = new ArrayList<String>();
-    public ArrayList<String> etat_base = new ArrayList<String>();
+    public Tuple pos_perso = new Tuple();
+    public ArrayList<Tuple> pos_caisses = new ArrayList<Tuple>();
+
 
     ModeleConcret(){
         etat.add("#");
@@ -77,7 +79,6 @@ public class ModeleConcret implements Modele {
         etat.add("#");
         etat.add("#");
         etat.add(",");
-        etat_base = etat;
     }
 
 
