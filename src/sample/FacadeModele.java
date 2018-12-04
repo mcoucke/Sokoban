@@ -31,4 +31,9 @@ public class FacadeModele {
         return modele.getPosPerso();
     }
 
+    public int getGridSize() {
+        return modele.getGridSize();
+    }
+
+
 }

@@ -20,6 +20,9 @@ public class ModeleConcret implements Modele {
         size_grid = getSizeOfGrid(1);
         getGrid(1);
         System.out.println(String.valueOf(pos_perso.getX()) + " " + String.valueOf(pos_perso.getY()));
+        for(Tuple t : pos_caisses){
+            System.out.println(String.valueOf(t.getX()) + " " + String.valueOf(t.getY()));
+        }
     }
 
 
@@ -35,18 +38,14 @@ public class ModeleConcret implements Modele {
         return pos_perso;
     }
 
+    public int getGridSize() {
+        return size_grid;
+    }
+
     public void move(int x, int y) {
-        //Parcours des caisses
-        for(Tuple t : pos_caisses){
-            // Si une caisse est sur la nouvelle pos du perso
-            if(t.getX() == pos_perso.getX() + x && t.getY() == pos_perso.getY() + y){
-                //On regarde si on peut pousser la caisse
-                if(etat.get(size_grid*t.getX() + t.getY() + x + y).equals(" ") ||
-                etat.get(size_grid*t.getX() + t.getY() + x + y).equals(".")){
-                    pos_perso.setPos(pos_perso.getX()+x,pos_perso.getY()+y);
-                    t.setPos(t.getX()+x, t.getY()+y);
-                }
-            }
+        if(!((pos_perso.getX()+x < 1) || (pos_perso.getY()+y < 0)) &&
+                !((pos_perso.getX()+x > size_grid) || (pos_perso.getY()+y > (etat.size()/size_grid)-1)) ){
+            pos_perso.setPos(pos_perso.getX()+x,pos_perso.getY()+y);
         }
     }
 
@@ -110,7 +109,6 @@ public class ModeleConcret implements Modele {
                             etat.add(String.valueOf(line.charAt(i)));
                         }
                     }
-                    etat.add(",");
                     line = String.valueOf(bufferedReader.readLine());
                     ligne++;
                 }
@@ -154,7 +152,6 @@ public class ModeleConcret implements Modele {
                                     etat.add(String.valueOf(line.charAt(i)));
                                 }
                             }
-                            etat.add(",");
                             line = String.valueOf(bufferedReader.readLine());
                             ligne++;
                         }

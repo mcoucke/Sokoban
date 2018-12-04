@@ -81,6 +81,15 @@ public class Controleur implements Sujet {
         };
     }
 
+    public CommandeGridSize commandeGetGridSize() {
+        return new CommandeGridSize() {
+            @Override
+            public int exec() {
+                return facadeModele.getGridSize();
+            }
+        };
+    }
+
 
 
 }

@@ -47,11 +47,11 @@ public class IHMFX extends Application implements Observateur {
             public void handle(KeyEvent keyEvent) {
                 switch(keyEvent.getCode()) {
                     case UP:
-                        controleur.move(0,1);
+                        controleur.move(0,-1);
                         vue.dessine();
                         break;
                     case DOWN:
-                        controleur.move(0,-1);
+                        controleur.move(0,1);
                         vue.dessine();
                         break;
                     case LEFT:
