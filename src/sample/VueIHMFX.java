@@ -18,6 +18,8 @@ public class VueIHMFX {
     CommandeTabTuple commandeGetMurs;
     CommandePosPerso commandeGetPosPerso;
     CommandeGridSize commandeGetGridSize;
+    int nb_lignes;
+    int nb_cols;
     GridPane gridPane = new GridPane();
     GridPane gridPaneNiveaux = new GridPane();
     Image[] sokoban = new Image[]{ new Image(new FileInputStream(
@@ -39,6 +41,8 @@ public class VueIHMFX {
         commandeGetMurs = controleur.commandeGetMurs();
         commandeGetPosPerso = controleur.commandeGetPosPerso();
         commandeGetGridSize = controleur.commandeGetGridSize();
+        nb_cols = commandeGetGridSize.exec();
+        nb_lignes = (int)((double)commandeGetEtat.exec().size()/((double)nb_cols));
         dessine();
     }
 
@@ -60,19 +64,21 @@ public class VueIHMFX {
                 img.setImage(sokoban[2]);
                 col++;
             }
-            if(commandeGetPosPerso.exec().getX() == col && commandeGetPosPerso.exec().getY() == ligne){
-                img.setImage(sokoban[0]);
-            }
-            for(Tuple t : commandeGetMurs.exec()){
-                if(t.getX() == col && t.getY() == ligne){
-                    img.setImage(sokoban[1]);
-                }
-            }
-            gridPane.add(img, col, ligne);
+
+            gridPane.add(img, col-1, ligne);
+
             if(commandeGetGridSize.exec() == col){
                 ligne++;
                 col = 0;
             }
+        }
+        ImageView img = new ImageView();
+        img.setImage(sokoban[0]);
+        gridPane.add(img, commandeGetPosPerso.exec().getX(), commandeGetPosPerso.exec().getY());
+        for(Tuple t : commandeGetMurs.exec()){
+            img = new ImageView();
+            img.setImage(sokoban[1]);
+            gridPane.add(img, t.getX(), t.getY());
         }
     }
 

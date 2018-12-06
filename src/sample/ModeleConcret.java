@@ -19,10 +19,6 @@ public class ModeleConcret implements Modele {
         Niveaux = new ArrayList<>();
         size_grid = getSizeOfGrid(1);
         getGrid(1);
-        System.out.println(String.valueOf(pos_perso.getX()) + " " + String.valueOf(pos_perso.getY()));
-        for(Tuple t : pos_caisses){
-            System.out.println(String.valueOf(t.getX()) + " " + String.valueOf(t.getY()));
-        }
     }
 
 
@@ -43,9 +39,36 @@ public class ModeleConcret implements Modele {
     }
 
     public void move(int x, int y) {
-        if(!((pos_perso.getX()+x < 1) || (pos_perso.getY()+y < 0)) &&
-                !((pos_perso.getX()+x > size_grid) || (pos_perso.getY()+y > (etat.size()/size_grid)-1)) ){
-            pos_perso.setPos(pos_perso.getX()+x,pos_perso.getY()+y);
+        //Si le personnage ne sort pas de la map
+        Tuple new_pos = new Tuple(pos_perso.getX()+x, pos_perso.getY()+y);
+        if(!((new_pos.getX() < 0) || (new_pos.getY() < 0)) &&
+                !((new_pos.getX() > size_grid-1) || (new_pos.getY() > (etat.size()/size_grid)-1)) ){
+            //Si le personnage ne se déplace pas contre un mur
+            boolean collision = false;
+            if(!(etat.get(new_pos.getX()+size_grid*pos_perso.getY()).equals("#")) &&
+                    !(etat.get(size_grid*new_pos.getY()+pos_perso.getX()).equals("#"))){
+                //Gestion caisses
+                for(Tuple t : pos_caisses){
+                    if((t.getX() == new_pos.getX()) && (t.getY() == new_pos.getY())){
+                        collision = true;
+                        boolean collision_caisse = false;
+                        //On vérifie que la case suivante n'est pas une caisse
+                        for(Tuple t2 : pos_caisses){
+                            if(t2.getX() == new_pos.getX()+x && t2.getY() == new_pos.getY()+y){
+                                collision_caisse = true;
+                            }
+                        }
+                        //Si la case suivant la caisse est libre
+                        if(!collision_caisse && !(etat.get(new_pos.getX()+x+size_grid*(new_pos.getY()+y)).equals("#"))){
+                            t.setPos(t.getX()+x, t.getY()+y);
+                            pos_perso.setPos(new_pos.getX(),new_pos.getY());
+                        }
+                    }
+                }
+                if(!collision){
+                    pos_perso.setPos(new_pos.getX(),new_pos.getY());
+                }
+            }
         }
     }
 
@@ -91,19 +114,19 @@ public class ModeleConcret implements Modele {
                     for (int i = 0; i < line.length(); ++i){
                         if(line.charAt(i) == '@'){
                             etat.add(" ");
-                            pos_perso.setPos(ligne, i);
+                            pos_perso.setPos(i, ligne);
                         }
                         else if(line.charAt(i) == '+'){
                             etat.add(".");
-                            pos_perso.setPos(ligne, i);
+                            pos_perso.setPos(i, ligne);
                         }
                         else if(line.charAt(i) == '$'){
                             etat.add(" ");
-                            pos_caisses.add(new Tuple(ligne, i));
+                            pos_caisses.add(new Tuple(i, ligne));
                         }
                         else if(line.charAt(i) == '*'){
                             etat.add(".");
-                            pos_caisses.add(new Tuple(ligne, i));
+                            pos_caisses.add(new Tuple(i, ligne));
                         }
                         else {
                             etat.add(String.valueOf(line.charAt(i)));
@@ -134,19 +157,19 @@ public class ModeleConcret implements Modele {
                             for (int i = 0; i < line.length(); ++i){
                                 if(line.charAt(i) == '@'){
                                     etat.add(" ");
-                                    pos_perso.setPos(ligne, i);
+                                    pos_perso.setPos(i, ligne);
                                 }
                                 else if(line.charAt(i) == '+'){
                                     etat.add(".");
-                                    pos_perso.setPos(ligne, i);
+                                    pos_perso.setPos(i, ligne);
                                 }
                                 else if(line.charAt(i) == '$'){
                                     etat.add(" ");
-                                    pos_caisses.add(new Tuple(ligne, i));
+                                    pos_caisses.add(new Tuple(i, ligne));
                                 }
                                 else if(line.charAt(i) == '*'){
                                     etat.add(".");
-                                    pos_caisses.add(new Tuple(ligne, i));
+                                    pos_caisses.add(new Tuple(i, ligne));
                                 }
                                 else {
                                     etat.add(String.valueOf(line.charAt(i)));
