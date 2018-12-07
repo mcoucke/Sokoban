@@ -72,6 +72,21 @@ public class ModeleConcret implements Modele {
         }
     }
 
+    private boolean check_fin(){
+        for(Tuple t_caisse : pos_caisses){
+            boolean is_in_fin = false;
+            for(Tuple t_fin : pos_fin){
+                if(t_caisse.getX() == t_fin.getX() && t_caisse.getY() == t_fin.getY()){
+                    is_in_fin = true;
+                }
+            }
+            if(!is_in_fin){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void undo(){
 
     }
