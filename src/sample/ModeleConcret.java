@@ -58,6 +58,10 @@ public class ModeleConcret implements Modele {
         return pos_caisses;
     }
 
+    public ArrayList<Tuple> getFins() {
+        return pos_fin;
+    }
+
     public Tuple getPosPerso() {
         return pos_perso;
     }
@@ -94,10 +98,11 @@ public class ModeleConcret implements Modele {
                     }
                 }
                 if(!collision){
-                    pos_perso.setPos(new_pos.getX(),new_pos.getY());
+                    pos_perso.setPos(new_pos.getX(), new_pos.getY());
                 }
             }
         }
+        //ajouter fin du jeu : if(check_fin)...
     }
 
     private boolean check_fin(){
@@ -161,6 +166,7 @@ public class ModeleConcret implements Modele {
                         }
                         else if(line.charAt(i) == '+'){
                             etat.add(".");
+                            pos_fin.add(new Tuple(i, ligne));
                             pos_perso.setPos(i, ligne);
                         }
                         else if(line.charAt(i) == '$'){
@@ -169,7 +175,12 @@ public class ModeleConcret implements Modele {
                         }
                         else if(line.charAt(i) == '*'){
                             etat.add(".");
+                            pos_fin.add(new Tuple(i, ligne));
                             pos_caisses.add(new Tuple(i, ligne));
+                        }
+                        else if(line.charAt(i) == '.'){
+                            etat.add(".");
+                            pos_fin.add(new Tuple(i, ligne));
                         }
                         else {
                             etat.add(String.valueOf(line.charAt(i)));
@@ -204,6 +215,7 @@ public class ModeleConcret implements Modele {
                                 }
                                 else if(line.charAt(i) == '+'){
                                     etat.add(".");
+                                    pos_fin.add(new Tuple(i, ligne));
                                     pos_perso.setPos(i, ligne);
                                 }
                                 else if(line.charAt(i) == '$'){
@@ -212,7 +224,12 @@ public class ModeleConcret implements Modele {
                                 }
                                 else if(line.charAt(i) == '*'){
                                     etat.add(".");
+                                    pos_fin.add(new Tuple(i, ligne));
                                     pos_caisses.add(new Tuple(i, ligne));
+                                }
+                                else if(line.charAt(i) == '.'){
+                                    etat.add(".");
+                                    pos_fin.add(new Tuple(i, ligne));
                                 }
                                 else {
                                     etat.add(String.valueOf(line.charAt(i)));

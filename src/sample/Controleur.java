@@ -72,6 +72,15 @@ public class Controleur implements Sujet {
         };
     }
 
+    public CommandeTabTuple commandeGetFins(){
+        return new CommandeTabTuple() {
+            @Override
+            public ArrayList<Tuple> exec() {
+                return facadeModele.getFins();
+            }
+        };
+    }
+
     public CommandePosPerso commandeGetPosPerso() {
         return new CommandePosPerso() {
             @Override

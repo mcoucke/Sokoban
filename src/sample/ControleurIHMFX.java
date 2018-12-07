@@ -27,6 +27,11 @@ public class ControleurIHMFX {
         redo.setPrefSize(100, 50);
         solve.setPrefSize(100, 50);
 
+        reset.setStyle("-fx-border-color: grey;-fx-focus-color: transparent;-fx-faint-focus-color: transparent;");
+        undo.setStyle("-fx-border-color: grey;-fx-focus-color: transparent;-fx-faint-focus-color: transparent;");
+        redo.setStyle("-fx-border-color: grey;-fx-focus-color: transparent;-fx-faint-focus-color: transparent;");
+        solve.setStyle("-fx-border-color: grey;-fx-focus-color: transparent;-fx-faint-focus-color: transparent;");
+
         buttonPane.getChildren().add(reset);
         buttonPane.getChildren().add(undo);
         buttonPane.getChildren().add(redo);

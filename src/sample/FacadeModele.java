@@ -27,6 +27,10 @@ public class FacadeModele {
         return modele.getMurs();
     }
 
+    public ArrayList<Tuple> getFins() {
+        return modele.getFins();
+    }
+
     public Tuple getPosPerso() {
         return modele.getPosPerso();
     }
