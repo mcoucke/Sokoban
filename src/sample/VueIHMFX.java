@@ -22,18 +22,16 @@ public class VueIHMFX {
     int nb_cols;
     GridPane gridPane = new GridPane();
     GridPane gridPaneNiveaux = new GridPane();
-    Image[] sokoban = new Image[]{ new Image(new FileInputStream(
-            "Character.png"),80,80,false,false),
+    Image[] sokoban = new Image[]{new Image(new FileInputStream(
+            "Character.png"), 80, 80, false, false),
             new Image(new FileInputStream(
-                    "CrateDark_Purple.png"),80,80,false,false),
+                    "CrateDark_Purple.png"), 80, 80, false, false),
             new Image(new FileInputStream(
-                    "EndPoint_Yellow.png"),80,80,false,false),
+                    "EndPoint_Yellow.png"), 80, 80, false, false),
             new Image(new FileInputStream(
-                    "Ground_Sand.png"),80,80,false,false),
+                    "Ground_Sand.png"), 80, 80, false, false),
             new Image(new FileInputStream(
-                    "Wall_Brown.png"),80,80,false,false)};
-
-
+                    "Wall_Brown.png"), 80, 80, false, false)};
 
 
     public VueIHMFX(Controleur controleur) throws FileNotFoundException {
@@ -42,7 +40,7 @@ public class VueIHMFX {
         commandeGetPosPerso = controleur.commandeGetPosPerso();
         commandeGetGridSize = controleur.commandeGetGridSize();
         nb_cols = commandeGetGridSize.exec();
-        nb_lignes = (int)((double)commandeGetEtat.exec().size()/((double)nb_cols));
+        nb_lignes = (int) ((double) commandeGetEtat.exec().size() / ((double) nb_cols));
         dessine();
     }
 
@@ -50,24 +48,22 @@ public class VueIHMFX {
         gridPane.getChildren().clear();
         int ligne = 0;
         int col = 0;
-        for(int i=0; i < commandeGetEtat.exec().size(); i++){
+        for (int i = 0; i < commandeGetEtat.exec().size(); i++) {
             ImageView img = new ImageView();
-            if(commandeGetEtat.exec().get(i).equals("#")){
+            if (commandeGetEtat.exec().get(i).equals("#")) {
                 img.setImage(sokoban[4]);
                 col++;
-            }
-            else if(commandeGetEtat.exec().get(i).equals(" ")){
+            } else if (commandeGetEtat.exec().get(i).equals(" ")) {
                 img.setImage(sokoban[3]);
                 col++;
-            }
-            else if(commandeGetEtat.exec().get(i).equals(".")){
+            } else if (commandeGetEtat.exec().get(i).equals(".")) {
                 img.setImage(sokoban[2]);
                 col++;
             }
 
-            gridPane.add(img, col-1, ligne);
+            gridPane.add(img, col - 1, ligne);
 
-            if(commandeGetGridSize.exec() == col){
+            if (commandeGetGridSize.exec() == col) {
                 ligne++;
                 col = 0;
             }
@@ -75,23 +71,12 @@ public class VueIHMFX {
         ImageView img = new ImageView();
         img.setImage(sokoban[0]);
         gridPane.add(img, commandeGetPosPerso.exec().getX(), commandeGetPosPerso.exec().getY());
-        for(Tuple t : commandeGetMurs.exec()){
+        for (Tuple t : commandeGetMurs.exec()) {
             img = new ImageView();
             img.setImage(sokoban[1]);
             gridPane.add(img, t.getX(), t.getY());
         }
     }
-
-    /*
-    public void generateGrid() {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 10; j++) {
-                int number = 4 * i + j + 1;
-                Button button = new Button("Niveau " + number);
-                button.setMaxHeight(80);
-                button.setMaxWidth(200);
-                gridPaneNiveaux.add(button, j, i);
-            }
-        }
-    }*/
 }
+
+
