@@ -11,14 +11,36 @@ public class ModeleConcret implements Modele {
     public Tuple pos_perso = new Tuple();
     public ArrayList<Tuple> pos_caisses = new ArrayList<Tuple>();
     private ArrayList<ArrayList<String> > Niveaux;
+    private int current_LVL;
     private int size_grid = 0;
 
 
     ModeleConcret(){
-        etat = new ArrayList<>();
         Niveaux = new ArrayList<>();
-        size_grid = getSizeOfGrid(1);
-        getGrid(1);
+        current_LVL = 1;
+        getLvl();
+        size_grid = getSizeOfGrid(current_LVL);
+        getCurrentLevel(current_LVL);
+        System.out.println(etat);
+    }
+
+    private void getCurrentLevel(int current_lvl) {
+
+        for (String s : Niveaux.get(current_lvl - 1)){
+            if(s.equals("$")){
+                //TODO
+            }else if(s.equals("*")){
+                //TODO
+            }else if(s.equals("+")){
+                //TODO
+            }else if(s.equals(".")){
+
+            }else if(s.equals("@")){
+                //TODO
+            }
+        }
+
+        etat = Niveaux.get(current_lvl - 1);
     }
 
 
@@ -227,6 +249,7 @@ public class ModeleConcret implements Modele {
                 if(line.contains(";")){
                     current_lvl++;
                     current_size = getSizeOfGrid(current_lvl + 1);
+                    Niveaux.add(new ArrayList<String>());
                 }else {
                     for (int i = 0; i < line.length(); ++i){
                         Niveaux.get(current_lvl).add(String.valueOf(line.charAt(i)));
