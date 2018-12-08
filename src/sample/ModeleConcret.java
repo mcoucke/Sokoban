@@ -22,17 +22,23 @@ public class ModeleConcret implements Modele {
         size_grid = getSizeOfGrid(current_LVL);
         getCurrentLevel(current_LVL);
         System.out.println(etat);
+        etat = new ArrayList<>();
+        getGrid(current_LVL);
+        System.out.println(etat);
     }
 
     private void getCurrentLevel(int current_lvl) {
-
-        for (String s : Niveaux.get(current_lvl - 1)){
+        int ligne = 0;
+        for (int i = 0; i <  Niveaux.get(current_lvl - 1).size(); ++i){
+            String s = Niveaux.get(current_lvl - 1).get(i);
             if(s.equals("$")){
-                //TODO
+                Niveaux.get(current_lvl - 1).set(i," ");
+                pos_perso.setPos(i, ligne);
             }else if(s.equals("*")){
                 //TODO
             }else if(s.equals("+")){
-                //TODO
+                Niveaux.get(current_lvl - 1).set(i,".");
+                pos_perso.setPos(i, ligne);
             }else if(s.equals(".")){
 
             }else if(s.equals("@")){
@@ -251,15 +257,14 @@ public class ModeleConcret implements Modele {
                     current_size = getSizeOfGrid(current_lvl + 1);
                     Niveaux.add(new ArrayList<String>());
                 }else {
+                    if(line.length() < current_size){
+                        while (line.length() < current_size){
+                            line += " ";
+                        }
+                    }
+
                     for (int i = 0; i < line.length(); ++i){
                         Niveaux.get(current_lvl).add(String.valueOf(line.charAt(i)));
-                    }
-                    if(line.length() < current_size){
-                        int x = line.length();
-                        while (x < current_size){
-                            Niveaux.get(current_lvl).add(" ");
-                            x++;
-                        }
                     }
                 }
             }
