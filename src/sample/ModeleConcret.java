@@ -16,10 +16,7 @@ public class ModeleConcret implements Modele {
 
     ModeleConcret(){
         Niveaux = new ArrayList<>();
-        current_LVL = 1;
         getLvl();
-        size_grid = getSizeOfGrid(current_LVL);
-        getCurrentLevel(current_LVL);
     }
 
     private void getCurrentLevel(int current_lvl) {
@@ -134,9 +131,17 @@ public class ModeleConcret implements Modele {
 
     public void undo(){
         if(coups_perso.size() > 0){
+            //On stock la liste de coup avant de supprimer le dernier coup
+            if(!this.redo_actif){
+                coups_perso_redo = new ArrayList<Tuple>(coups_perso);
+                this.redo_actif = true;
+            }
+            //On récupère le dernier coup
             Tuple move_perso = coups_perso.get(coups_perso.size()-1);
+            //On retire le dernier coup de la liste
             coups_perso.remove(coups_perso.size()-1);
 
+            //Même chose pour les caisses
             Tuple move_caisse = coups_caisses.get(coups_caisses.size()-1);
             coups_caisses.remove(coups_caisses.size()-1);
 
@@ -152,6 +157,11 @@ public class ModeleConcret implements Modele {
     }
 
     public void redo(){
+        if(coups_perso.size() < coups_perso_redo.size()){
+            //On effectue le dernier coup annulé
+            Tuple coup = coups_perso_redo.get(coups_perso.size());
+            move(coup.getX(), coup.getY());
+        }
 
     }
 

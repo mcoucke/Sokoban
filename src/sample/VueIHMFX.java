@@ -1,13 +1,8 @@
 package sample;
 
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
-
-import java.util.ArrayList;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,10 +14,8 @@ public class VueIHMFX {
     CommandePosPerso commandeGetPosPerso;
     CommandeGridSize commandeGetGridSize;
     CommandeTabTuple commandeGetFins;
-    int nb_lignes;
     int nb_cols;
     GridPane gridPane = new GridPane();
-    GridPane gridPaneNiveaux = new GridPane();
     Image[] sokoban = new Image[]{new Image(new FileInputStream(
             "Character.png"), 80, 80, false, false),
             new Image(new FileInputStream(
@@ -44,8 +37,6 @@ public class VueIHMFX {
         commandeGetGridSize = controleur.commandeGetGridSize();
         commandeGetFins = controleur.commandeGetFins();
         nb_cols = commandeGetGridSize.exec();
-        nb_lignes = (int) ((double) commandeGetEtat.exec().size() / ((double) nb_cols));
-        dessine();
     }
 
     public void dessine() {

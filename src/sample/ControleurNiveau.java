@@ -2,6 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
@@ -12,6 +13,7 @@ public class ControleurNiveau {
 
     ControleurNiveau(Controleur controleur, VueGrilleNiveau vue){
         gridNiveau = new GridPane();
+        gridNiveau.setAlignment(Pos.CENTER);
         generateGrid();
         this.controleur = controleur;
         this.vue = vue;

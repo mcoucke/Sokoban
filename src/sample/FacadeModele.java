@@ -7,6 +7,7 @@ public class FacadeModele {
 
     public void move(int x, int y) {
         modele.move(x,y);
+        modele.disableRedo();
     }
 
     public void reset() {
