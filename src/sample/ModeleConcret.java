@@ -8,8 +8,13 @@ public class ModeleConcret implements Modele {
     // FONCTIONS À IMPLÉMENTER
 
     public ArrayList<String> etat;
+    //Positions initiales sauvegardées pour le reset
+    public Tuple pos_perso_init;
+    public ArrayList<Tuple> pos_caisses_init;
+    //Positions perso et caisses
     public Tuple pos_perso = new Tuple();
     public ArrayList<Tuple> pos_caisses = new ArrayList<Tuple>();
+    //Gestion niveaux
     private ArrayList<ArrayList<String> > Niveaux;
     private int current_LVL;
     private int size_grid = 0;
@@ -52,6 +57,11 @@ public class ModeleConcret implements Modele {
         }
 
         etat = Niveaux.get(current_lvl - 1);
+        this.pos_perso_init = new Tuple(pos_perso.getX(), pos_perso.getY());
+        this.pos_caisses_init = new ArrayList<Tuple>();
+        for(Tuple t : pos_caisses){
+            pos_caisses_init.add(new Tuple(t.getX(), t.getY()));
+        }
     }
 
 
@@ -332,6 +342,14 @@ public class ModeleConcret implements Modele {
 
     @Override
     public void reset() {
-
+        pos_caisses = new ArrayList<Tuple>();
+        for(Tuple t : pos_caisses_init){
+            pos_caisses.add(new Tuple(t.getX(), t.getY()));
+        }
+        pos_perso = new Tuple(pos_perso_init.getX(), pos_perso_init.getY());
+        coups_perso = new ArrayList<Tuple>();
+        coups_caisses = new ArrayList<Tuple>();
+        coups_perso_redo = new ArrayList<Tuple>();
+        redo_actif = false;
     }
 }
