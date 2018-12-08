@@ -1,9 +1,12 @@
 package sample;
 
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 
 public class Controleur implements Sujet {
     private static Controleur singleton;
+    private Stage stage;
 
 
     public static Controleur getControleur() {
@@ -27,6 +30,12 @@ public class Controleur implements Sujet {
     public void notifie() {
         for (Observateur observateur:observateurs)
             observateur.actualise();
+    }
+
+    public Stage getStage(){ return this.stage; }
+
+    public void setStage(Stage stage){
+        this.stage = stage;
     }
 
     public void move(int x, int y) {
@@ -53,6 +62,13 @@ public class Controleur implements Sujet {
         facadeModele.solve();
         notifie();
     }
+
+    public void choixNiveau(int i) {
+        facadeModele.choixNiveau(i);
+        observateurs.get(0).setScene("jeu");
+        notifie();
+    }
+
 
     public CommandeTabString commandeGetEtat() {
         return new CommandeTabString() {

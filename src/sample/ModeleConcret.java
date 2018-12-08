@@ -13,17 +13,10 @@ public class ModeleConcret implements Modele {
     private ArrayList<ArrayList<String> > Niveaux;
     private int current_LVL;
     private int size_grid = 0;
-<<<<<<< HEAD
-
-=======
-    public ArrayList<Tuple> pos_fin = new ArrayList<Tuple>();
-    public ArrayList<Tuple> coups_perso = new ArrayList<Tuple>();
-    public ArrayList<Tuple> coups_caisses = new ArrayList<Tuple>();
->>>>>>> f6f6ef3... implémentation du undo
 
     ModeleConcret(){
         Niveaux = new ArrayList<>();
-        current_LVL = 2;
+        current_LVL = 1;
         getLvl();
         size_grid = getSizeOfGrid(current_LVL);
         getCurrentLevel(current_LVL);

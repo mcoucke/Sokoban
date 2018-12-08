@@ -19,6 +19,10 @@ public class FacadeModele {
 
     public void solve() { modele.solve(); }
 
+    public void choixNiveau(int i) {
+        modele.choixNiveau(i);
+    }
+
     public ArrayList<String> getEtat() {
         return modele.getEtat();
     }

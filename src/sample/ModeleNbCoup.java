@@ -25,6 +25,7 @@ public class ModeleNbCoup implements Modele {
     public void undo(){}
     public void redo(){}
     public void solve(){}
+    public void choixNiveau(int i){}
 
     public void reset(){
         nbCoup=0;

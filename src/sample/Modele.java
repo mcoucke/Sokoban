@@ -9,4 +9,5 @@ public interface Modele {
     public void redo();
     public void solve();
     public void reset();
+    public void choixNiveau(int i);
 }
