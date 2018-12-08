@@ -21,28 +21,37 @@ public class ModeleConcret implements Modele {
         getLvl();
         size_grid = getSizeOfGrid(current_LVL);
         getCurrentLevel(current_LVL);
-        System.out.println(etat);
-        etat = new ArrayList<>();
-        getGrid(current_LVL);
-        System.out.println(etat);
     }
 
     private void getCurrentLevel(int current_lvl) {
+        pos_perso = new Tuple();
+        pos_caisses = new ArrayList<>();
+        pos_fin = new ArrayList<>();
         int ligne = 0;
+        int col = 0;
         for (int i = 0; i <  Niveaux.get(current_lvl - 1).size(); ++i){
             String s = Niveaux.get(current_lvl - 1).get(i);
             if(s.equals("$")){
                 Niveaux.get(current_lvl - 1).set(i," ");
-                pos_perso.setPos(i, ligne);
+                pos_caisses.add(new Tuple(col, ligne));
             }else if(s.equals("*")){
-                //TODO
+                Niveaux.get(current_lvl - 1).set(i,".");
+                pos_fin.add(new Tuple(col, ligne));
+                pos_caisses.add(new Tuple(col, ligne));
             }else if(s.equals("+")){
                 Niveaux.get(current_lvl - 1).set(i,".");
-                pos_perso.setPos(i, ligne);
+                pos_perso.setPos(col, ligne);
+                pos_fin.add(new Tuple(col, ligne));
             }else if(s.equals(".")){
-
+                pos_fin.add(new Tuple(col, ligne));
             }else if(s.equals("@")){
-                //TODO
+                Niveaux.get(current_lvl - 1).set(i," ");
+                pos_perso.setPos(col, ligne);
+            }
+            col++;
+            if(col % size_grid == 0){
+                ligne++;
+                col = 0;
             }
         }
 
