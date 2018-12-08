@@ -13,11 +13,17 @@ public class ModeleConcret implements Modele {
     private ArrayList<ArrayList<String> > Niveaux;
     private int current_LVL;
     private int size_grid = 0;
+<<<<<<< HEAD
 
+=======
+    public ArrayList<Tuple> pos_fin = new ArrayList<Tuple>();
+    public ArrayList<Tuple> coups_perso = new ArrayList<Tuple>();
+    public ArrayList<Tuple> coups_caisses = new ArrayList<Tuple>();
+>>>>>>> f6f6ef3... implémentation du undo
 
     ModeleConcret(){
         Niveaux = new ArrayList<>();
-        current_LVL = 1;
+        current_LVL = 2;
         getLvl();
         size_grid = getSizeOfGrid(current_LVL);
         getCurrentLevel(current_LVL);
@@ -103,11 +109,15 @@ public class ModeleConcret implements Modele {
                         if(!collision_caisse && !(etat.get(new_pos.getX()+x+size_grid*(new_pos.getY()+y)).equals("#"))){
                             t.setPos(t.getX()+x, t.getY()+y);
                             pos_perso.setPos(new_pos.getX(),new_pos.getY());
+                            coups_perso.add(new Tuple(x,y));
+                            coups_caisses.add(new Tuple(x,y));
                         }
                     }
                 }
                 if(!collision){
                     pos_perso.setPos(new_pos.getX(), new_pos.getY());
+                    coups_perso.add(new Tuple(x,y));
+                    coups_caisses.add(new Tuple(0,0));
                 }
             }
         }
@@ -130,7 +140,22 @@ public class ModeleConcret implements Modele {
     }
 
     public void undo(){
+        if(coups_perso.size() > 0){
+            Tuple move_perso = coups_perso.get(coups_perso.size()-1);
+            coups_perso.remove(coups_perso.size()-1);
 
+            Tuple move_caisse = coups_caisses.get(coups_caisses.size()-1);
+            coups_caisses.remove(coups_caisses.size()-1);
+
+            if(move_caisse.getX() != 0 || move_caisse.getY() != 0){
+                for(Tuple t : pos_caisses){
+                    if(pos_perso.getX()+move_caisse.getX() == t.getX() && pos_perso.getY()+move_caisse.getY() == t.getY()){
+                        t.setPos(t.getX()-move_caisse.getX(), t.getY()-move_caisse.getY());
+                    }
+                }
+            }
+            pos_perso.setPos(pos_perso.getX()-move_perso.getX(), pos_perso.getY()-move_perso.getY());
+        }
     }
 
     public void redo(){
