@@ -50,6 +50,7 @@ public class ControleurIHMFX {
         undo.setOnAction(new ActionUndo());
         redo.setOnAction(new ActionRedo());
         solve.setOnAction(new ActionSolve());
+        menu.setOnAction(new ActionMenu());
     }
 
     class ActionReset implements EventHandler<ActionEvent> {
@@ -68,5 +69,9 @@ public class ControleurIHMFX {
 
     class ActionSolve implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) { controleur.solve();}
+    }
+
+    class ActionMenu implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) { controleur.retourMenu();}
     }
 }
