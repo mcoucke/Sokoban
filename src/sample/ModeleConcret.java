@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class ModeleConcret implements Modele {
 
-    // FONCTIONS À IMPLÉMENTER
 
     public ArrayList<String> etat;
     //Positions initiales sauvegardées pour le reset
@@ -111,6 +110,7 @@ public class ModeleConcret implements Modele {
                             pos_perso.setPos(new_pos.getX(),new_pos.getY());
                             coups_perso.add(new Tuple(x,y));
                             coups_caisses.add(new Tuple(x,y));
+                            nb_coups++;
                         }
                     }
                 }
@@ -118,13 +118,13 @@ public class ModeleConcret implements Modele {
                     pos_perso.setPos(new_pos.getX(), new_pos.getY());
                     coups_perso.add(new Tuple(x,y));
                     coups_caisses.add(new Tuple(0,0));
+                    nb_coups++;
                 }
             }
         }
-        //ajouter fin du jeu : if(check_fin)...
     }
 
-    private boolean check_fin(){
+    public boolean checkFin(){
         for(Tuple t_caisse : pos_caisses){
             boolean is_in_fin = false;
             for(Tuple t_fin : pos_fin){
@@ -164,6 +164,7 @@ public class ModeleConcret implements Modele {
             }
             pos_perso.setPos(pos_perso.getX()-move_perso.getX(), pos_perso.getY()-move_perso.getY());
         }
+        nb_coups--;
     }
 
     public void redo(){
@@ -176,7 +177,7 @@ public class ModeleConcret implements Modele {
     }
 
     public void solve(){
-
+        //todo
     }
 
     public int getPos(){

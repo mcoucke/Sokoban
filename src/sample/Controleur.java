@@ -32,12 +32,6 @@ public class Controleur implements Sujet {
             observateur.actualise();
     }
 
-    public Stage getStage(){ return this.stage; }
-
-    public void setStage(Stage stage){
-        this.stage = stage;
-    }
-
     public void move(int x, int y) {
         facadeModele.move(x,y);
         notifie();
@@ -63,10 +57,27 @@ public class Controleur implements Sujet {
         notifie();
     }
 
-    public void choixNiveau(int i) {
-        facadeModele.choixNiveau(i);
-        observateurs.get(0).setScene("jeu");
+    public void retourMenu(){
+        observateurs.get(0).setScene("menu");
         notifie();
+    }
+
+    public void choixNiveau(int i) {
+        observateurs.get(0).setScene("jeu");
+
+        facadeModele.choixNiveau(i);
+        notifie();
+    }
+
+    public void checkFin(){
+        if(facadeModele.checkFin()){
+            observateurs.get(0).setScene("fin");
+            notifie();
+        }
+    }
+
+    public int getNbCoups(){
+        return facadeModele.getNbCoups();
     }
 
 

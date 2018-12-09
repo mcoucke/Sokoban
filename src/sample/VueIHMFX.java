@@ -16,27 +16,33 @@ public class VueIHMFX {
     CommandeTabTuple commandeGetFins;
     int nb_cols;
     GridPane gridPane = new GridPane();
-    Image[] sokoban = new Image[]{new Image(new FileInputStream(
-            "Character.png"), 80, 80, false, false),
-            new Image(new FileInputStream(
-                    "CrateDark_Purple.png"), 80, 80, false, false),
-            new Image(new FileInputStream(
-                    "EndPoint_Yellow.png"), 80, 80, false, false),
-            new Image(new FileInputStream(
-                    "Ground_Sand.png"), 80, 80, false, false),
-            new Image(new FileInputStream(
-                    "Wall_Brown.png"), 80, 80, false, false),
-            new Image(new FileInputStream(
-                    "Crate_Yellow.png"), 80, 80, false, false)};
+    Image[] sokoban;
 
 
-    public VueIHMFX(Controleur controleur) throws FileNotFoundException {
+    public VueIHMFX(Controleur controleur) {
         commandeGetEtat = controleur.commandeGetEtat();
         commandeGetMurs = controleur.commandeGetMurs();
         commandeGetPosPerso = controleur.commandeGetPosPerso();
         commandeGetGridSize = controleur.commandeGetGridSize();
         commandeGetFins = controleur.commandeGetFins();
         nb_cols = commandeGetGridSize.exec();
+        try {
+            sokoban = new Image[]{new Image(new FileInputStream(
+                    "Character.png"), 70, 70, false, false),
+                    new Image(new FileInputStream(
+                            "CrateDark_Purple.png"), 70, 70, false, false),
+                    new Image(new FileInputStream(
+                            "EndPoint_Yellow.png"), 70, 70, false, false),
+                    new Image(new FileInputStream(
+                            "Ground_Sand.png"), 70, 70, false, false),
+                    new Image(new FileInputStream(
+                            "Wall_Brown.png"), 70, 70, false, false),
+                    new Image(new FileInputStream(
+                            "Crate_Yellow.png"), 70, 70, false, false)};
+        }
+        catch (FileNotFoundException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 
     public void dessine() {

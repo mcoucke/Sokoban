@@ -24,6 +24,10 @@ public class FacadeModele {
         modele.choixNiveau(i);
     }
 
+    public boolean checkFin(){
+        return modele.checkFin();
+    }
+
     public ArrayList<String> getEtat() {
         return modele.getEtat();
     }
@@ -42,6 +46,10 @@ public class FacadeModele {
 
     public int getGridSize() {
         return modele.getGridSize();
+    }
+
+    public int getNbCoups() {
+        return modele.getNbCoups();
     }
 
 
