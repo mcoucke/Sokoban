@@ -84,6 +84,10 @@ public class ModeleConcret implements Modele {
         return size_grid;
     }
 
+    public int getCurrentLvl(){
+        return this.current_LVL;
+    }
+
     public void move(int x, int y) {
         //Si le personnage ne sort pas de la map
         Tuple new_pos = new Tuple(pos_perso.getX()+x, pos_perso.getY()+y);
@@ -351,6 +355,7 @@ public class ModeleConcret implements Modele {
         coups_perso = new ArrayList<Tuple>();
         coups_caisses = new ArrayList<Tuple>();
         coups_perso_redo = new ArrayList<Tuple>();
+        nb_coups = 0;
         redo_actif = false;
     }
 }

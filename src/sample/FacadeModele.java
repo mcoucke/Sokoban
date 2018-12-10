@@ -52,5 +52,9 @@ public class FacadeModele {
         return modele.getNbCoups();
     }
 
+    public int getCurrentLvl(){
+        return modele.getCurrentLvl();
+    }
+
 
 }

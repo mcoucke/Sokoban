@@ -3,19 +3,23 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 public class ControleurIHMFX {
     Controleur controleur;
     VueIHMFX vue;
     Button reset, undo, redo, solve, menu;
-    FlowPane buttonPane;
+    Text nb_coups;
+    GridPane buttonPane;
 
     ControleurIHMFX(Controleur controleur, VueIHMFX vue) {
         this.controleur = controleur;
         this.vue = vue;
 
-        buttonPane = new FlowPane();
+        buttonPane = new GridPane();
+
+        nb_coups = new Text("Coups : 0");
 
         reset = new Button("Reset");
         undo = new Button("Undo");
@@ -36,11 +40,12 @@ public class ControleurIHMFX {
         redo.setStyle("-fx-border-color: grey;-fx-focus-color: transparent;-fx-faint-focus-color: transparent;");
         solve.setStyle("-fx-border-color: grey;-fx-focus-color: transparent;-fx-faint-focus-color: transparent;");
 
-        buttonPane.getChildren().add(menu);
-        buttonPane.getChildren().add(reset);
-        buttonPane.getChildren().add(undo);
-        buttonPane.getChildren().add(redo);
-        buttonPane.getChildren().add(solve);
+        buttonPane.add(nb_coups, 1,0);
+        buttonPane.add(menu,3,0);
+        buttonPane.add(reset,4,0);
+        buttonPane.add(undo,5,0);
+        buttonPane.add(redo,6,0);
+        buttonPane.add(solve,7,0);
 
         buttonPane.setStyle("-fx-alignment: center;");
         buttonPane.setHgap(10);
@@ -53,22 +58,36 @@ public class ControleurIHMFX {
         menu.setOnAction(new ActionMenu());
     }
 
+    public void actualise(){
+        nb_coups.setText("Coups : " + controleur.commandeGetNbCoups().exec());
+    }
+
     class ActionReset implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
             controleur.reset();
+            actualise();
         }
     }
 
     class ActionUndo implements EventHandler<ActionEvent> {
-        public void handle(ActionEvent event) { controleur.undo();}
+        public void handle(ActionEvent event) {
+            controleur.undo();
+            actualise();
+        }
     }
 
     class ActionRedo implements EventHandler<ActionEvent> {
-        public void handle(ActionEvent event) { controleur.redo();}
+        public void handle(ActionEvent event) {
+            controleur.redo();
+            actualise();
+        }
     }
 
     class ActionSolve implements EventHandler<ActionEvent> {
-        public void handle(ActionEvent event) { controleur.solve();}
+        public void handle(ActionEvent event) {
+            controleur.solve();
+            actualise();
+        }
     }
 
     class ActionMenu implements EventHandler<ActionEvent> {

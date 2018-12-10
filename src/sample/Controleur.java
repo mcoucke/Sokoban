@@ -80,6 +80,11 @@ public class Controleur implements Sujet {
         return facadeModele.getNbCoups();
     }
 
+    public void niveauSuivant(){
+        int currentLvl = facadeModele.getCurrentLvl();
+        choixNiveau(currentLvl + 1);
+    }
+
 
     public CommandeTabString commandeGetEtat() {
         return new CommandeTabString() {
@@ -117,11 +122,20 @@ public class Controleur implements Sujet {
         };
     }
 
-    public CommandeGridSize commandeGetGridSize() {
-        return new CommandeGridSize() {
+    public CommandeInt commandeGetGridSize() {
+        return new CommandeInt() {
             @Override
             public int exec() {
                 return facadeModele.getGridSize();
+            }
+        };
+    }
+
+    public CommandeInt commandeGetNbCoups() {
+        return new CommandeInt() {
+            @Override
+            public int exec() {
+                return facadeModele.getNbCoups();
             }
         };
     }

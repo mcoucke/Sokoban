@@ -50,7 +50,7 @@ public class MonteurScene {
         if (bas.size()!=0) {
             GridPane gridPaneBas = new GridPane();
             gridPaneBas.setAlignment(Pos.CENTER);
-            gridPaneBas.setMinSize(largeur, hauteur/8);
+            gridPaneBas.setMinSize(largeur, hauteur/7);
             gridPaneBas.setPadding(new Insets(10, 10, 10, 10));
             //Setting the padding
             gridPane.setPadding(new Insets(10, 10, 10, 10));

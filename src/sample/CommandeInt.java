@@ -2,6 +2,6 @@ package sample;
 
 import java.util.ArrayList;
 
-public interface CommandeGridSize {
+public interface CommandeInt {
     int exec();
 }

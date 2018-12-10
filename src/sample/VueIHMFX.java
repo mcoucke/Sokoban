@@ -12,7 +12,7 @@ public class VueIHMFX {
     CommandeTabString commandeGetEtat;
     CommandeTabTuple commandeGetMurs;
     CommandePosPerso commandeGetPosPerso;
-    CommandeGridSize commandeGetGridSize;
+    CommandeInt commandeGetGridSize;
     CommandeTabTuple commandeGetFins;
     int nb_cols;
     GridPane gridPane = new GridPane();
@@ -28,17 +28,17 @@ public class VueIHMFX {
         nb_cols = commandeGetGridSize.exec();
         try {
             sokoban = new Image[]{new Image(new FileInputStream(
-                    "Character.png"), 70, 70, false, false),
+                    "Character.png"), 65, 65, false, false),
                     new Image(new FileInputStream(
-                            "CrateDark_Purple.png"), 70, 70, false, false),
+                            "CrateDark_Purple.png"), 65, 65, false, false),
                     new Image(new FileInputStream(
-                            "EndPoint_Yellow.png"), 70, 70, false, false),
+                            "EndPoint_Yellow.png"), 65, 65, false, false),
                     new Image(new FileInputStream(
-                            "Ground_Sand.png"), 70, 70, false, false),
+                            "Ground_Sand.png"), 65, 65, false, false),
                     new Image(new FileInputStream(
-                            "Wall_Brown.png"), 70, 70, false, false),
+                            "Wall_Brown.png"), 65, 65, false, false),
                     new Image(new FileInputStream(
-                            "Crate_Yellow.png"), 70, 70, false, false)};
+                            "Crate_Yellow.png"), 65, 65, false, false)};
         }
         catch (FileNotFoundException ex){
             System.out.println(ex.getMessage());

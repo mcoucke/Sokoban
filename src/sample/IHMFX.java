@@ -74,21 +74,25 @@ public class IHMFX extends Application implements Observateur {
                         case UP:
                             controleur.move(0,-1);
                             vue_jeu.dessine();
+                            controleurIHMFX.actualise();
                             controleur.checkFin();
                             break;
                         case DOWN:
                             controleur.move(0,1);
                             vue_jeu.dessine();
+                            controleurIHMFX.actualise();
                             controleur.checkFin();
                             break;
                         case LEFT:
                             controleur.move(-1,0);
                             vue_jeu.dessine();
+                            controleurIHMFX.actualise();
                             controleur.checkFin();
                             break;
                         case RIGHT:
                             controleur.move(1,0);
                             vue_jeu.dessine();
+                            controleurIHMFX.actualise();
                             controleur.checkFin();
                             break;
                     }
