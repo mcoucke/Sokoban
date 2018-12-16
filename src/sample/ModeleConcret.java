@@ -18,7 +18,7 @@ public class ModeleConcret implements Modele {
     private int current_LVL;
     private int size_grid = 0;
 
-    ModeleConcret(){
+    public ModeleConcret(){
         Niveaux = new ArrayList<>();
         getLvl();
     }
@@ -144,31 +144,33 @@ public class ModeleConcret implements Modele {
     }
 
     public void undo(){
-        if(coups_perso.size() > 0){
-            //On stock la liste de coup avant de supprimer le dernier coup
-            if(!this.redo_actif){
-                coups_perso_redo = new ArrayList<Tuple>(coups_perso);
-                this.redo_actif = true;
-            }
-            //On récupère le dernier coup
-            Tuple move_perso = coups_perso.get(coups_perso.size()-1);
-            //On retire le dernier coup de la liste
-            coups_perso.remove(coups_perso.size()-1);
+        if(nb_coups > 0){
+            if(coups_perso.size() > 0){
+                //On stock la liste de coup avant de supprimer le dernier coup
+                if(!this.redo_actif){
+                    coups_perso_redo = new ArrayList<Tuple>(coups_perso);
+                    this.redo_actif = true;
+                }
+                //On récupère le dernier coup
+                Tuple move_perso = coups_perso.get(coups_perso.size()-1);
+                //On retire le dernier coup de la liste
+                coups_perso.remove(coups_perso.size()-1);
 
-            //Même chose pour les caisses
-            Tuple move_caisse = coups_caisses.get(coups_caisses.size()-1);
-            coups_caisses.remove(coups_caisses.size()-1);
+                //Même chose pour les caisses
+                Tuple move_caisse = coups_caisses.get(coups_caisses.size()-1);
+                coups_caisses.remove(coups_caisses.size()-1);
 
-            if(move_caisse.getX() != 0 || move_caisse.getY() != 0){
-                for(Tuple t : pos_caisses){
-                    if(pos_perso.getX()+move_caisse.getX() == t.getX() && pos_perso.getY()+move_caisse.getY() == t.getY()){
-                        t.setPos(t.getX()-move_caisse.getX(), t.getY()-move_caisse.getY());
+                if(move_caisse.getX() != 0 || move_caisse.getY() != 0){
+                    for(Tuple t : pos_caisses){
+                        if(pos_perso.getX()+move_caisse.getX() == t.getX() && pos_perso.getY()+move_caisse.getY() == t.getY()){
+                            t.setPos(t.getX()-move_caisse.getX(), t.getY()-move_caisse.getY());
+                        }
                     }
                 }
+                pos_perso.setPos(pos_perso.getX()-move_perso.getX(), pos_perso.getY()-move_perso.getY());
             }
-            pos_perso.setPos(pos_perso.getX()-move_perso.getX(), pos_perso.getY()-move_perso.getY());
+            nb_coups--;
         }
-        nb_coups--;
     }
 
     public void redo(){
@@ -198,9 +200,12 @@ public class ModeleConcret implements Modele {
         ArrayList<String> grille = null;
         int size = getSizeOfGrid(niveau);
         try {
-            File file_Micro = new File("res/MicroCosmos.txt");
-            FileReader reader = new FileReader(file_Micro);
-            BufferedReader bufferedReader = new BufferedReader(reader);
+//            File file_Micro = new File("classpath:/res/MicroCosmos.txt");
+//            FileReader reader = new FileReader(file_Micro);
+//            BufferedReader bufferedReader = new BufferedReader(reader);
+            ClassLoader classLoader = getClass().getClassLoader();
+            InputStream file_Micro = classLoader.getResourceAsStream("MicroCosmos.txt");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(file_Micro));
 
             String line = bufferedReader.readLine();
             if (niveau == 1){
@@ -311,9 +316,9 @@ public class ModeleConcret implements Modele {
 
     public void getLvl(){
         try{
-            File file_Micro = new File("res/MicroCosmos.txt");
-            FileReader reader = new FileReader(file_Micro);
-            BufferedReader bufferedReader = new BufferedReader(reader);
+            ClassLoader classLoader = getClass().getClassLoader();
+            InputStream file_Micro = classLoader.getResourceAsStream("MicroCosmos.txt");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(file_Micro));
 
             String line;
             Niveaux.add(new ArrayList<String>());

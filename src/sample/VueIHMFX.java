@@ -26,23 +26,24 @@ public class VueIHMFX {
         commandeGetGridSize = controleur.commandeGetGridSize();
         commandeGetFins = controleur.commandeGetFins();
         nb_cols = commandeGetGridSize.exec();
-        try {
-            sokoban = new Image[]{new Image(new FileInputStream(
+        ClassLoader classLoader = getClass().getClassLoader();
+//        try {
+            sokoban = new Image[]{new Image(classLoader.getResourceAsStream(
                     "Character.png"), 65, 65, false, false),
-                    new Image(new FileInputStream(
+                    new Image(classLoader.getResourceAsStream(
                             "CrateDark_Purple.png"), 65, 65, false, false),
-                    new Image(new FileInputStream(
+                    new Image(classLoader.getResourceAsStream(
                             "EndPoint_Yellow.png"), 65, 65, false, false),
-                    new Image(new FileInputStream(
+                    new Image(classLoader.getResourceAsStream(
                             "Ground_Sand.png"), 65, 65, false, false),
-                    new Image(new FileInputStream(
+                    new Image(classLoader.getResourceAsStream(
                             "Wall_Brown.png"), 65, 65, false, false),
-                    new Image(new FileInputStream(
+                    new Image(classLoader.getResourceAsStream(
                             "Crate_Yellow.png"), 65, 65, false, false)};
-        }
-        catch (FileNotFoundException ex){
-            System.out.println(ex.getMessage());
-        }
+//        }
+//        catch (FileNotFoundException ex){
+//            System.out.println(ex.getMessage());
+//        }
     }
 
     public void dessine() {
